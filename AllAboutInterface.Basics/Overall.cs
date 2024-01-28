@@ -4,6 +4,8 @@ public interface IOverall
 {
     // 最普通的方法
     void Foo();
+  
+    #region Top Secrets
     
     // 属性
     string Name { get; set; }
@@ -41,4 +43,6 @@ public interface IOverall
     {
         Console.WriteLine("VirtualStaticMethod");
     }
+    
+    #endregion
 }

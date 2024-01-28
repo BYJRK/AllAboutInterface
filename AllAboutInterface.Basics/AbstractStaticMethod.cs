@@ -15,11 +15,11 @@ interface IAbstractStaticMethod
     static abstract string Foo();
 }
 
-class DemoClass1 : IAbstractStaticMethod
+class DemoClass : IAbstractStaticMethod
 {
     public static string Foo()
     {
-        return nameof(DemoClass1);
+        return nameof(DemoClass);
     }
 }
 
@@ -27,12 +27,12 @@ class DemoClass1 : IAbstractStaticMethod
 
 interface IDeserializable<T> where T : IDeserializable<T>
 {
-    static abstract T Serialize(string json);
+    static abstract T Deserialize(string json);
 }
 
 class MyDataModel : IDeserializable<MyDataModel>
 {
-    public static MyDataModel Serialize(string json)
+    public static MyDataModel Deserialize(string json)
     {
         return JsonSerializer.Deserialize<MyDataModel>(json);
     }
@@ -42,20 +42,24 @@ class MyDataModel : IDeserializable<MyDataModel>
 
 #region 经典用法：Factory
 
-interface IFactory<T> where T : IFactory<T>
+interface IFactory<T>
 {
     static abstract T Create();
 }
 
-class ClassWithFactoryMethod : IFactory<ClassWithFactoryMethod>
+class ClassToBeCreated
+{
+}
+
+class ClassWithFactoryMethod : IFactory<ClassToBeCreated>
 {
     private ClassWithFactoryMethod()
     {
     }
 
-    public static ClassWithFactoryMethod Create()
+    public static ClassToBeCreated Create()
     {
-        return new ClassWithFactoryMethod();
+        return new ClassToBeCreated();
     }
 }
 
@@ -74,6 +78,8 @@ class SingletonClass : ISingleton<SingletonClass>
 
     private static readonly Lazy<SingletonClass> _instanceHolder = new(() => new SingletonClass());
     public static SingletonClass Instance => _instanceHolder.Value;
+
+    // public static SingletonClass Instance { get; } = new();
 }
 
 #endregion
@@ -107,3 +113,11 @@ class MyNumber : IOperators<MyNumber>
 }
 
 #endregion
+
+class Usage
+{
+    public static void Demo()
+    {
+        DemoClass.Foo();
+    }
+}

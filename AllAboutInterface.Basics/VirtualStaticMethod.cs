@@ -1,4 +1,7 @@
-﻿namespace AllAboutInterface.Basics.VirtualStaticMethod;
+﻿using System.Numerics;
+using AllAboutInterface.Basics.ExplicitImpl;
+
+namespace AllAboutInterface.Basics.VirtualStaticMethod;
 
 interface IVirtualStaticMethod
 {
@@ -9,11 +12,15 @@ interface IVirtualStaticMethod
     {
         Console.WriteLine("Foo from interface");
     }
+
+    static void Bar()
+    {
+    }
 }
 
 interface IFoo : IVirtualStaticMethod
 {
-    new static void Foo()
+    static void Foo()
     {
         
     }
@@ -22,7 +29,7 @@ interface IFoo : IVirtualStaticMethod
 class DemoClass : IVirtualStaticMethod
 {
     /// <inheritdoc cref="IVirtualStaticMethod.Foo"/>
-    public static void Foo()
+    public static void Foo() // 无法使用 override 关键字
     {
         Console.WriteLine("Foo from class");
     }
@@ -32,6 +39,7 @@ static class Usage
 {
     public static void Demo()
     {
-        
+        // IVirtualStaticMethod.Foo();
+        DemoClass.Foo();
     }
 }

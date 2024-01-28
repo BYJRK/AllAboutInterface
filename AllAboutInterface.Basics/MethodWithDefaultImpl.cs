@@ -31,10 +31,6 @@ public class DemoClass1 : IFoo1, IFoo2
     // 如果实现，那么接口中的默认实现将会直接被忽略
 
     // NOTE：因为一定会被忽略，所以被忽略的方法究竟出自哪个接口，是无所谓的
-    public void MethodWithImpl()
-    {
-        Console.WriteLine($"这是{nameof(DemoClass1)}类对于接口中带有默认实现的方法的实现");
-    }
 
     public void Bar()
     {
@@ -52,7 +48,6 @@ static class Usage
         // 因为编译器不能保证是否只有一个接口提供了这一签名的方法的默认实现
         // demo.MethodWIthImpl();
         ((IFoo1)demo).Foo();
-        ((IFoo2)demo).Foo();
         demo.Bar();
         
         // 由于类实现了接口中的方法，因此即便显式使用接口对象，也依旧会调用自己的实现

@@ -8,6 +8,10 @@ interface IFooBase
         Console.WriteLine("IFooBase.PrivateMethod");
     }
 
+    // private void Foo();
+
+    // protected void Foo();
+
     protected void ProtectedMethod()
     {
         Console.WriteLine("IFooBase.ProtectedMethod");
@@ -31,9 +35,27 @@ interface IFoo : IFooBase
     }
 }
 
+partial interface IBar
+{
+    private partial void Bar();
+
+    private extern void Foo();
+}
+
+partial interface IBar
+{
+    private partial void Bar()
+    {
+        
+    }
+}
+
 class Foo : IFoo
 {
-    
+    public void Foo1()
+    {
+        
+    }
 }
 
 static class Usage
