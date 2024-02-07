@@ -35,11 +35,23 @@ class DemoClass : IVirtualStaticMethod
     }
 }
 
+class DemoClassDefault : IVirtualStaticMethod
+{
+}
+
 static class Usage
 {
     public static void Demo()
     {
         // IVirtualStaticMethod.Foo();
-        DemoClass.Foo();
+        DemoClass.Foo();             // Foo from class
+        CallFoo<DemoClass>();        // Foo from class
+        // DemoClassDefault.Foo();   // 找不到方法
+        CallFoo<DemoClassDefault>(); // Foo from interface
+    }
+    
+    public static void CallFoo<T>() where T : IVirtualStaticMethod
+    {
+        T.Foo();
     }
 }
